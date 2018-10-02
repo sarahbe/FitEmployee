@@ -1,0 +1,32 @@
+﻿@model List<EmployeeApp.Models.EmployeeInfo>
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Employees</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="createEditEmployeeModal" asp-action="Create" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  New Employee
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone No</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
