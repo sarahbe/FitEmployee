@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeApp.Models;
+using EmployeeApp.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +35,16 @@ namespace EmployeeApp
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<Settings>(
+      options =>
+      {
+          options.ConnectionString = Configuration.GetSection("MongoDb:ConnectionString").Value;
+          options.Database = Configuration.GetSection("MongoDb:Database").Value;
+
+      });
+
+            services.AddTransient<IDataContext, DataContext>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +52,7 @@ namespace EmployeeApp
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               
             }
             else
             {
@@ -56,7 +68,7 @@ namespace EmployeeApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
     }

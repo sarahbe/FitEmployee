@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MongoDB.Driver;
+
 namespace EmployeeApp.Models
 {
-    public class IDatatContext
+    public interface IDataContext
     {
-        public IDatatContext()
-        {
-        }
+        IMongoCollection<EmployeeInfo> EmployeeInfos { get; }
     }
 }

@@ -3,8 +3,8 @@ namespace EmployeeApp.Models
 {
     public class Settings
     {
-        public Settings()
-        {
-        }
+        public string ConnectionString { get; set; }
+        public string Database { get; set; }
     }
+
 }
